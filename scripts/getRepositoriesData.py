@@ -23,7 +23,7 @@ def run_query(query):
 
 query = """
 {
-    search(query: "stars:>1", type: REPOSITORY, first: 50) {
+    search(query: "stars:>1", type: REPOSITORY, first: 40) {
     edges {
       node {
         ... on Repository {
@@ -55,8 +55,8 @@ query = """
 result = run_query(query)
 
 # Create the directory if not exists
-os.makedirs('dataset/json', exist_ok=True)
+os.makedirs('scripts/dataset/json', exist_ok=True)
 
 # Save the result in a json archive
-with open('dataset/json/data.json', 'w', encoding='utf-8') as f:
+with open('scripts/dataset/json/data.json', 'w', encoding='utf-8') as f:
     json.dump(result, f, ensure_ascii=False, indent=2)
