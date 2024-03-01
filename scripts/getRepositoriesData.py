@@ -2,6 +2,7 @@ import requests
 import os
 from dotenv import load_dotenv
 import json
+import pandas as pd
 
 load_dotenv()
 
@@ -60,3 +61,13 @@ os.makedirs('scripts/dataset/json', exist_ok=True)
 # Save the result in a json archive
 with open('scripts/dataset/json/data.json', 'w', encoding='utf-8') as f:
     json.dump(result, f, ensure_ascii=False, indent=2)
+
+# Load the json file
+with open('scripts/dataset/json/data.json', 'r') as f:
+    data = json.load(f)
+
+# Create a dataframe
+df = pd.json_normalize(data['data']['search']['edges'])
+
+# Save the dataframe in a csv file
+df.to_csv('scripts/dataset/csv/data.csv', index=False)
