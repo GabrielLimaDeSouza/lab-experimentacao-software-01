@@ -10,21 +10,19 @@ API_KEY = os.getenv("API_KEY")
 api_url = 'https://api.github.com/graphql'
 
 headers = {'Authorization': 'Bearer %s' % API_KEY}
+allResults = {"resultados": []}
 
 
-def run_query(query):
-    request = requests.post(
-        url=api_url, json={'query': query}, headers=headers)
-    if request.status_code == 200:
-        return request.json()
-    else:
-        raise Exception("Query failed to run by returning code of {}. {}".format(
-            request.status_code, query))
+def run_query(numRepos):
+  endCursor = None
 
-
-query = """
-{
-    search(query: "stars:>1", type: REPOSITORY, first: 40) {
+  for i in range (int(numRepos/20)):
+      variables = {
+        "endCursor": endCursor
+      }
+      query = """
+    query ($endCursor: String) {
+      search(query: "stars:>1", type: REPOSITORY, first: 20, after: $endCursor) {
     edges {
       node {
         ... on Repository {
@@ -48,13 +46,33 @@ query = """
           }
         }
       }
-    }
+      
+    }pageInfo {
+        endCursor
+        hasNextPage
+      }
   }
 }
-"""
+"""    
+      request = requests.post(
+        url=api_url, json={'query': query, 'variables': variables}, headers=headers)
+      resp = request.json()
+      allResults["resultados"].append(resp)
+      endCursor = resp['data']['search']['pageInfo']['endCursor']
 
-result = run_query(query)
+    
+  if request.status_code == 200:
+      return allResults
+  else:
+      raise Exception("Query failed to run by returning code of {}. {}".format(
+          request.status_code, query))
 
+
+
+
+numRespos = 100
+result = run_query(numRespos)
+print(result)
 # Create the directory if not exists
 os.makedirs('scripts/dataset/json', exist_ok=True)
 
