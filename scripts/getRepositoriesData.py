@@ -10,7 +10,7 @@ API_KEY = os.getenv("API_KEY")
 api_url = 'https://api.github.com/graphql'
 
 headers = {'Authorization': 'Bearer %s' % API_KEY}
-allResults = {"resultados": []}
+allResults = list()
 
 
 def run_query(numRepos):
@@ -57,7 +57,7 @@ def run_query(numRepos):
       request = requests.post(
         url=api_url, json={'query': query, 'variables': variables}, headers=headers)
       resp = request.json()
-      allResults["resultados"].append(resp)
+      allResults.append(resp)
       endCursor = resp['data']['search']['pageInfo']['endCursor']
 
     
@@ -72,7 +72,7 @@ def run_query(numRepos):
 
 numRespos = 100
 result = run_query(numRespos)
-print(result)
+
 # Create the directory if not exists
 os.makedirs('scripts/dataset/json', exist_ok=True)
 
@@ -84,8 +84,14 @@ with open('scripts/dataset/json/data.json', 'w', encoding='utf-8') as f:
 with open('scripts/dataset/json/data.json', 'r') as f:
     data = json.load(f)
 
-# Create a dataframe
-df = pd.json_normalize(data['data']['search']['edges'])
+df = pd.DataFrame()
+dfs = []
+
+for i in range(len(data)):
+    normalized_data = pd.json_normalize(data[i]['data']['search']['edges'])
+    dfs.append(normalized_data)
+
+df = pd.concat(dfs, ignore_index=True)
 
 # Save the dataframe in a csv file
 df.to_csv('scripts/dataset/csv/data.csv', index=False)
