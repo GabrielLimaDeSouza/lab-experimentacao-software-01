@@ -26,10 +26,8 @@
 
 **RQ 05. Sistemas populares são escritos nas linguagens mais populares?**
 
--   Sistemas populares são desenvolvidos nas linguagens mais amplamente adotadas pela comunidade de desenvolvedores.
 -   Projetos populares podem ser mais diversificados em termos de linguagens de programação, refletindo a variedade de interesses da comunidade.
 
 **RQ 06. Sistemas populares possuem um alto percentual de issues fechadas?**
 
 -   Sistemas populares podem ter uma taxa de fechamento de issues mais alta devido a uma comunidade ativa.
--   Projetos populares tendem a ser bem mantidos, com um alto percentual de issues resolvidas.
