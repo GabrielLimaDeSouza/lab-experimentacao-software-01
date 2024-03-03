@@ -22,11 +22,15 @@ def run_query(numRepos):
       }
       query = """
     query ($endCursor: String) {
-      search(query: "stars:>1", type: REPOSITORY, first: 20, after: $endCursor) {
+      search(query: "stars:>1 fork:false sort:stars-desc", type: REPOSITORY, first:20, after: $endCursor) {
     edges {
       node {
         ... on Repository {
+          nameWithOwner
           name
+          owner{
+            login
+          }
           createdAt
           updatedAt
           primaryLanguage {
@@ -46,7 +50,7 @@ def run_query(numRepos):
           }
         }
       }
-      
+
     }pageInfo {
         endCursor
         hasNextPage
@@ -70,8 +74,8 @@ def run_query(numRepos):
 
 
 
-numRespos = 100
-result = run_query(numRespos)
+numRepos = 1000
+result = run_query(numRepos)
 
 # Create the directory if not exists
 os.makedirs('scripts/dataset/json', exist_ok=True)
