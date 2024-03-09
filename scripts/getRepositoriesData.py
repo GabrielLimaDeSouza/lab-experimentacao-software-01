@@ -2,6 +2,8 @@ import requests
 import os
 from dotenv import load_dotenv
 import pandas as pd
+import matplotlib.pyplot as plt
+from datetime import datetime
 
 load_dotenv()
 
@@ -40,6 +42,9 @@ def make_graphql_request(variables):
                         updatedAt
                         primaryLanguage {
                             name
+                        }
+                        stargazers{
+                            totalCount
                         }
                         totalIssues: issues {
                             totalCount
@@ -84,60 +89,108 @@ def save_to_csv(result):
 
     # Save the dataframe directly to a CSV file
     df.to_csv('scripts/dataset/csv/data.csv', index=False)
+
+    return df
+
+
+def calculate_repositories_age(df):
+    # Convert the 'createdAt' column to datetime format
+    df['createdAt'] = pd.to_datetime(df['node.createdAt']).dt.tz_localize(None)
+
+    # Calculate the repository age in days
+    df['repository_age'] = (pd.to_datetime('today').tz_localize(None) - df['createdAt']).dt.days
+
+    plot_repositories_age_box_plot(df)
+
+
+def calculate_repositories_update(df):
+    # Convert the 'updatedAt' column to datetime format
+    df['updatedAt'] = pd.to_datetime(df['node.updatedAt'], utc=True)
+
+    # Calculate the repository last update in days
+    df['repository_update'] = (pd.Timestamp.utcnow() - df['updatedAt']).dt.days
+
+    print("Idade mínima de atualização dos repositórios:", df['repository_update'].min())
+    print("Idade máxima de atualização dos repositórios:", df['repository_update'].max())
+
+    print(df['repository_update'])
+
+
+def calculate_pull_requests(df):
+    df['node.pullRequests.totalCount']
     
+    plot_pull_requests_box_plot(df)
+
+
+def calculate_releases(df):
+    df['node.releases.totalCount']
+    
+    plot_releases_box_plot(df)
+    
+
+def calculate_popular_languages(df):
+    popular_languages = df['node.primaryLanguage.name'].value_counts()
+
+    plot_popular_languages_bar_chart(popular_languages)
+
+
+def calculate_closed_issues_ratio(df):
+    df['closed_issues_ratio'] = ((df['node.closedIssues.totalCount'] / df['node.totalIssues.totalCount']) * 100).round(2)
+    
+    plot_closed_issues_box_plot(df)
+
+
+def plot_repositories_age_box_plot(df):
+    plt.figure(figsize=(10, 6))
+    plt.boxplot(df['repository_age'], vert=False)
+    plt.title('Distribuição da Idade dos Repositórios')
+    plt.xlabel('Idade (dias)')
+    plt.show()
+
+
+def plot_popular_languages_bar_chart(popular_languages):
+    plt.figure(figsize=(10, 6))
+    popular_languages.plot(kind='bar')
+    plt.title('Linguagens Mais Populares')
+    plt.xlabel('Linguagem')
+    plt.ylabel('Número de Repositórios')
+    plt.show()
+
+
+def plot_pull_requests_box_plot(df):
+    plt.figure(figsize=(10, 6))
+    plt.boxplot(df['node.pullRequests.totalCount'], vert=False)
+    plt.title('Distribuição do Número de Pull Requests')
+    plt.xlabel('Número de Pull Requests')
+    plt.show()
+
+
+def plot_releases_box_plot(df):
+    plt.figure(figsize=(10, 6))
+    plt.boxplot(df['node.releases.totalCount'], vert=False)
+    plt.title('Distribuição do Número de Releases')
+    plt.xlabel('Número de Releases')
+    plt.show()
+
+
+def plot_closed_issues_box_plot(df):
+    plt.figure(figsize=(10, 6))
+    plt.boxplot(df['node.closedIssues.totalCount'], vert=False)
+    plt.title('Distribuição do Número de Issues Fechadas')
+    plt.xlabel('Número de Issues Fechadas')
+    plt.show()
+
+
+def main():
+    result = fetch_repository_data(100)
+    df = save_to_csv(result)
+
     calculate_repositories_age(df)
     calculate_repositories_update(df)
     calculate_pull_requests(df)
     calculate_releases(df)
     calculate_popular_languages(df)
     calculate_closed_issues_ratio(df)
-    
-
-def calculate_repositories_age(df):
-    # Convert the 'createdAt' column to datetime format
-    df['createdAt'] = pd.to_datetime(df['node.createdAt']).dt.tz_localize(None) 
-
-    # Calculate the repository age in days
-    df['repository_age'] = (pd.to_datetime('today').tz_localize(None) - df['createdAt']).dt.days
-
-    print(df['repository_age'])
 
 
-def calculate_repositories_update(df):
-    # Convert the 'updatedAt' column to datetime format
-    df['updatedAt'] = pd.to_datetime(df['node.updatedAt']).dt.tz_localize(None) 
-
-    # Calculate the repository last update in days
-    df['repository_update'] = (pd.to_datetime('today').tz_localize(None) - df['updatedAt']).dt.days
-
-    print(df['repository_update'])
-
-
-def calculate_pull_requests(df):
-    total_pull_requests = df['node.pullRequests.totalCount']
-    print('Total de Pull Requests Aceitas:')
-    print(total_pull_requests)
-
-
-def calculate_releases(df):
-    total_releases = df['node.releases.totalCount']
-    print('Total de Releases:')
-    print(total_releases)
-
-
-def calculate_popular_languages(df):
-    popular_languages = df['node.primaryLanguage.name'].value_counts()
-    print('Linguagens Mais Populares:')
-    print(popular_languages)
-
-
-def calculate_closed_issues_ratio(df):
-    df['closed_issues_ratio'] = df['node.closedIssues.totalCount'] / df['node.totalIssues.totalCount']
-    
-    print('Razão entre Issues Fechadas e Total de Issues:')
-    print(df['closed_issues_ratio'])
-
-
-result = fetch_repository_data(100)
-save_to_csv(result)
-
+main()
