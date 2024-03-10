@@ -3,7 +3,6 @@ import os
 from dotenv import load_dotenv
 import pandas as pd
 import matplotlib.pyplot as plt
-from datetime import datetime
 
 load_dotenv()
 
@@ -98,7 +97,7 @@ def calculate_repositories_age(df):
     df['createdAt'] = pd.to_datetime(df['node.createdAt']).dt.tz_localize(None)
 
     # Calculate the repository age in days
-    df['repository_age'] = (pd.to_datetime('today').tz_localize(None) - df['createdAt']).dt.days
+    df['repository_age'] = (pd.to_datetime('today').tz_localize(None) - df['createdAt']).dt.days / 365
 
     plot_repositories_age_box_plot(df)
 
@@ -114,6 +113,8 @@ def calculate_repositories_update(df):
     print("Idade máxima de atualização dos repositórios:", df['repository_update'].max())
 
     print(df['repository_update'])
+
+    plot_repositories_update_box_plot(df)
 
 
 def calculate_pull_requests(df):
@@ -144,7 +145,15 @@ def plot_repositories_age_box_plot(df):
     plt.figure(figsize=(10, 6))
     plt.boxplot(df['repository_age'], vert=False)
     plt.title('Distribuição da Idade dos Repositórios')
-    plt.xlabel('Idade (dias)')
+    plt.xlabel('Idade (anos)')
+    plt.show()
+
+
+def plot_repositories_update_box_plot(df):
+    plt.figure(figsize=(10, 6))
+    plt.boxplot(df['repository_update'], vert=False)
+    plt.title('Distribuição da Idade da Última Atualização dos Repositórios')
+    plt.xlabel('Idade da Última Atualização (dias)')
     plt.show()
 
 
