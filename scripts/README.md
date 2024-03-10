@@ -1,7 +1,4 @@
-
 # Scripts
 
-
-* Adicionar os scripts nesta pasta.
-
-* Listar os scripts desenvolvidos, adicionando uma breve descrição de como utilizá-los neste arquivo.
+- Diretório responsável por armazenar os scripts produzidos no laboratório.
+- O script [getRepositoriesData.py](https://github.com/GabrielLimaDeSouza/lab-experimentacao-software-01/blob/main/scripts/getRepositoriesData.py) é o responsável por realizar a coleta, manipulação e criação dos gráficos a partir dos dados.
