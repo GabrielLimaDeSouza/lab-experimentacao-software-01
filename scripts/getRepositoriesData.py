@@ -101,6 +101,8 @@ def calculate_repositories_age(df):
 
     plot_repositories_age_box_plot(df)
 
+    grafico_dispersao(df, 'repository_age', 'node.stargazers.totalCount', 'Idade do Repositório (anos)', 'Número de Estrelas', 'Gráfico de Dispersão de Idade x Número de Estrelas')
+
 
 def calculate_repositories_update(df):
     # Convert the 'updatedAt' column to datetime format
@@ -116,17 +118,24 @@ def calculate_repositories_update(df):
 
     plot_repositories_update_box_plot(df)
 
+    grafico_dispersao(df, 'repository_update', 'node.stargazers.totalCount', 'Idade da Última Atualização (dias)', 'Número de Estrelas', 'Gráfico de Dispersão da Última Atualização x Número de Estrelas')
+
+
 
 def calculate_pull_requests(df):
     df['node.pullRequests.totalCount']
     
     plot_pull_requests_box_plot(df)
 
+    grafico_dispersao(df, 'node.pullRequests.totalCount', 'node.stargazers.totalCount', 'Número de Pull Requests', 'Número de Estrelas', 'Gráfico de Dispersão de Pull Requests x Número de Estrelas')
+
 
 def calculate_releases(df):
     df['node.releases.totalCount']
     
     plot_releases_box_plot(df)
+
+    grafico_dispersao(df, 'node.releases.totalCount', 'node.stargazers.totalCount', 'Número de Releases', 'Número de Estrelas', 'Gráfico de Dispersão de Releases x Número de Estrelas')
     
 
 def calculate_popular_languages(df):
@@ -134,11 +143,15 @@ def calculate_popular_languages(df):
 
     plot_popular_languages_bar_chart(popular_languages)
 
+    grafico_dispersao(df, 'node.stargazers.totalCount', 'node.totalIssues.totalCount', 'Número de Estrelas', 'Número de Issues', 'Gráfico de Dispersão de Linguagens Populares x Número de Estrelas')
+
 
 def calculate_closed_issues_ratio(df):
     df['closed_issues_ratio'] = ((df['node.closedIssues.totalCount'] / df['node.totalIssues.totalCount']) * 100).round(2)
     
     plot_closed_issues_box_plot(df)
+
+    grafico_dispersao(df, 'closed_issues_ratio', 'node.stargazers.totalCount', 'Razão de Issues Fechadas (%)', 'Número de Estrelas', 'Gráfico de Dispersão de Issues Fechadas x Número de Estrelas')
 
 
 def plot_repositories_age_box_plot(df):
@@ -188,6 +201,19 @@ def plot_closed_issues_box_plot(df):
     plt.title('Distribuição do Número de Issues Fechadas')
     plt.xlabel('Número de Issues Fechadas')
     plt.show()
+
+def grafico_dispersao(df, coluna_x: str, coluna_y: str, label_x=None, label_y=None, title: str = ''):
+  
+  label_x = coluna_x if label_x is None else label_x
+  label_y = coluna_y if label_y is None else label_y
+
+  plt.figure(figsize=(10, 6))
+  plt.scatter(df[coluna_x], df[coluna_y])
+  plt.xlabel(label_x)
+  plt.ylabel(label_y)
+  plt.title(title)
+  plt.grid(True)
+  plt.show()
 
 
 def main():
