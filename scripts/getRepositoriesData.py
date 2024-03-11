@@ -99,7 +99,7 @@ def calculate_repositories_age(df):
     # Calculate the repository age in days
     df['repository_age'] = (pd.to_datetime('today').tz_localize(None) - df['createdAt']).dt.days / 365
 
-    plot_repositories_age_box_plot(df)
+    box_plot(df, 'repository_age', 'Idade dos Repositórios', 'Idade (anos)')
 
     grafico_dispersao(df, 'repository_age', 'node.stargazers.totalCount', 'Idade do Repositório (anos)', 'Número de Estrelas', 'Gráfico de Dispersão de Idade x Número de Estrelas')
 
@@ -116,7 +116,7 @@ def calculate_repositories_update(df):
 
     print(df['repository_update'])
 
-    plot_repositories_update_box_plot(df)
+    box_plot(df, 'repository_update', 'Idade da Última Atualização', 'Idade (dias)')
 
     grafico_dispersao(df, 'repository_update', 'node.stargazers.totalCount', 'Idade da Última Atualização (dias)', 'Número de Estrelas', 'Gráfico de Dispersão da Última Atualização x Número de Estrelas')
 
@@ -125,7 +125,7 @@ def calculate_repositories_update(df):
 def calculate_pull_requests(df):
     df['node.pullRequests.totalCount']
     
-    plot_pull_requests_box_plot(df)
+    box_plot(df, 'node.pullRequests.totalCount', 'Número de Pull Requests', 'Número de Pull Requests')
 
     grafico_dispersao(df, 'node.pullRequests.totalCount', 'node.stargazers.totalCount', 'Número de Pull Requests', 'Número de Estrelas', 'Gráfico de Dispersão de Pull Requests x Número de Estrelas')
 
@@ -133,7 +133,7 @@ def calculate_pull_requests(df):
 def calculate_releases(df):
     df['node.releases.totalCount']
     
-    plot_releases_box_plot(df)
+    box_plot(df, 'node.releases.totalCount', 'Número de Releases', 'Número de Releases')
 
     grafico_dispersao(df, 'node.releases.totalCount', 'node.stargazers.totalCount', 'Número de Releases', 'Número de Estrelas', 'Gráfico de Dispersão de Releases x Número de Estrelas')
     
@@ -141,7 +141,7 @@ def calculate_releases(df):
 def calculate_popular_languages(df):
     popular_languages = df['node.primaryLanguage.name'].value_counts()
 
-    plot_popular_languages_bar_chart(popular_languages)
+    box_plot(df, 'node.primaryLanguage.name', 'Linguagens Populares', 'Linguagem')
 
     grafico_dispersao(df, 'node.stargazers.totalCount', 'node.totalIssues.totalCount', 'Número de Estrelas', 'Número de Issues', 'Gráfico de Dispersão de Linguagens Populares x Número de Estrelas')
 
@@ -149,57 +149,16 @@ def calculate_popular_languages(df):
 def calculate_closed_issues_ratio(df):
     df['closed_issues_ratio'] = ((df['node.closedIssues.totalCount'] / df['node.totalIssues.totalCount']) * 100).round(2)
     
-    plot_closed_issues_box_plot(df)
+    box_plot(df, 'closed_issues_ratio', 'Razão de Issues Fechadas (%)', 'Razão de Issues Fechadas (%)')
 
     grafico_dispersao(df, 'closed_issues_ratio', 'node.stargazers.totalCount', 'Razão de Issues Fechadas (%)', 'Número de Estrelas', 'Gráfico de Dispersão de Issues Fechadas x Número de Estrelas')
 
 
-def plot_repositories_age_box_plot(df):
+def box_plot(df, column, title, xlabel):
     plt.figure(figsize=(10, 6))
-    plt.boxplot(df['repository_age'], vert=False)
-    plt.title('Distribuição da Idade dos Repositórios')
-    plt.xlabel('Idade (anos)')
-    plt.show()
-
-
-def plot_repositories_update_box_plot(df):
-    plt.figure(figsize=(10, 6))
-    plt.boxplot(df['repository_update'], vert=False)
-    plt.title('Distribuição da Idade da Última Atualização dos Repositórios')
-    plt.xlabel('Idade da Última Atualização (dias)')
-    plt.show()
-
-
-def plot_popular_languages_bar_chart(popular_languages):
-    plt.figure(figsize=(10, 6))
-    popular_languages.plot(kind='bar')
-    plt.title('Linguagens Mais Populares')
-    plt.xlabel('Linguagem')
-    plt.ylabel('Número de Repositórios')
-    plt.show()
-
-
-def plot_pull_requests_box_plot(df):
-    plt.figure(figsize=(10, 6))
-    plt.boxplot(df['node.pullRequests.totalCount'], vert=False)
-    plt.title('Distribuição do Número de Pull Requests')
-    plt.xlabel('Número de Pull Requests')
-    plt.show()
-
-
-def plot_releases_box_plot(df):
-    plt.figure(figsize=(10, 6))
-    plt.boxplot(df['node.releases.totalCount'], vert=False)
-    plt.title('Distribuição do Número de Releases')
-    plt.xlabel('Número de Releases')
-    plt.show()
-
-
-def plot_closed_issues_box_plot(df):
-    plt.figure(figsize=(10, 6))
-    plt.boxplot(df['node.closedIssues.totalCount'], vert=False)
-    plt.title('Distribuição do Número de Issues Fechadas')
-    plt.xlabel('Número de Issues Fechadas')
+    plt.boxplot(df[column], vert=False)
+    plt.title(title)
+    plt.xlabel(xlabel)
     plt.show()
 
 def grafico_dispersao(df, coluna_x: str, coluna_y: str, label_x=None, label_y=None, title: str = ''):
@@ -217,7 +176,7 @@ def grafico_dispersao(df, coluna_x: str, coluna_y: str, label_x=None, label_y=No
 
 
 def main():
-    result = fetch_repository_data(100)
+    result = fetch_repository_data(1000)
     df = save_to_csv(result)
 
     calculate_repositories_age(df)
