@@ -141,7 +141,7 @@ def calculate_releases(df):
 def calculate_popular_languages(df):
     popular_languages = df['node.primaryLanguage.name'].value_counts()
 
-    box_plot(df, 'node.primaryLanguage.name', 'Linguagens Populares', 'Linguagem')
+    plot_popular_languages_bar_chart(popular_languages)
 
     grafico_dispersao(df, 'node.stargazers.totalCount', 'node.totalIssues.totalCount', 'Número de Estrelas', 'Número de Issues', 'Gráfico de Dispersão de Linguagens Populares x Número de Estrelas')
 
@@ -149,7 +149,7 @@ def calculate_popular_languages(df):
 def calculate_closed_issues_ratio(df):
     df['closed_issues_ratio'] = ((df['node.closedIssues.totalCount'] / df['node.totalIssues.totalCount']) * 100).round(2)
     
-    box_plot(df, 'closed_issues_ratio', 'Razão de Issues Fechadas (%)', 'Razão de Issues Fechadas (%)')
+    plot_closed_issues_box_plot(df)
 
     grafico_dispersao(df, 'closed_issues_ratio', 'node.stargazers.totalCount', 'Razão de Issues Fechadas (%)', 'Número de Estrelas', 'Gráfico de Dispersão de Issues Fechadas x Número de Estrelas')
 
@@ -159,6 +159,21 @@ def box_plot(df, column, title, xlabel):
     plt.boxplot(df[column], vert=False)
     plt.title(title)
     plt.xlabel(xlabel)
+    plt.show()
+
+def plot_popular_languages_bar_chart(popular_languages):
+    plt.figure(figsize=(10, 6))
+    popular_languages.plot(kind='bar')
+    plt.title('Linguagens Mais Populares')
+    plt.xlabel('Linguagem')
+    plt.ylabel('Número de Repositórios')
+    plt.show()
+
+def plot_closed_issues_box_plot(df):
+    plt.figure(figsize=(10, 6))
+    plt.boxplot(df['node.closedIssues.totalCount'], vert=False)
+    plt.title('Distribuição do Número de Issues Fechadas')
+    plt.xlabel('Número de Issues Fechadas')
     plt.show()
 
 def grafico_dispersao(df, coluna_x: str, coluna_y: str, label_x=None, label_y=None, title: str = ''):
@@ -176,7 +191,7 @@ def grafico_dispersao(df, coluna_x: str, coluna_y: str, label_x=None, label_y=No
 
 
 def main():
-    result = fetch_repository_data(1000)
+    result = fetch_repository_data(100)
     df = save_to_csv(result)
 
     calculate_repositories_age(df)
