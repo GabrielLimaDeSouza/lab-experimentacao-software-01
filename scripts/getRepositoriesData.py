@@ -143,7 +143,7 @@ def calculate_popular_languages(df):
 
     plot_popular_languages_bar_chart(popular_languages)
 
-    grafico_dispersao(df, 'node.stargazers.totalCount', 'node.totalIssues.totalCount', 'Número de Estrelas', 'Número de Issues', 'Gráfico de Dispersão de Linguagens Populares x Número de Estrelas')
+    grafico_dispersao_popular_languages(df, 'node.primaryLanguage.name', 'node.stargazers.totalCount', 'Linguagens populares', 'Número de Estrelas', 'Gráfico de Dispersão de Linguagens Populares x Número de Estrelas')
 
 
 def calculate_closed_issues_ratio(df):
@@ -177,21 +177,39 @@ def plot_closed_issues_box_plot(df):
     plt.show()
 
 def grafico_dispersao(df, coluna_x: str, coluna_y: str, label_x=None, label_y=None, title: str = ''):
-  
-  label_x = coluna_x if label_x is None else label_x
-  label_y = coluna_y if label_y is None else label_y
+    label_x = coluna_x if label_x is None else label_x
+    label_y = coluna_y if label_y is None else label_y
 
-  plt.figure(figsize=(10, 6))
-  plt.scatter(df[coluna_x], df[coluna_y])
-  plt.xlabel(label_x)
-  plt.ylabel(label_y)
-  plt.title(title)
-  plt.grid(True)
-  plt.show()
+    plt.figure(figsize=(10, 6))
+    plt.scatter(df[coluna_x], df[coluna_y])
+    plt.xlabel(label_x)
+    plt.ylabel(label_y)
+    plt.title(title)
+    plt.grid(True)
+    plt.show()
+
+def grafico_dispersao_popular_languages(df, x_column, y_column, xlabel, ylabel, title):
+    xlabel = x_column if xlabel is None else xlabel
+    ylabel = y_column if ylabel is None else ylabel
+
+    data_counts = df[x_column].value_counts().reset_index()
+    data_counts.columns = [x_column, 'count']
+
+    merged_df = pd.merge(df, data_counts, left_on=x_column, right_on=x_column)
+
+    plt.figure(figsize=(12, 8)) 
+    plt.scatter(merged_df[x_column], merged_df[y_column], s=50)  
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.title(title)
+    plt.xticks(rotation=45) 
+    plt.grid(True)
+    plt.tight_layout() 
+    plt.show()
 
 
 def main():
-    result = fetch_repository_data(100)
+    result = fetch_repository_data(1000)
     df = save_to_csv(result)
 
     calculate_repositories_age(df)
