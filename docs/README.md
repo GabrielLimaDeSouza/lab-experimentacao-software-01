@@ -24,7 +24,7 @@ Para a realização do trabalho, foi realizado uma análise abrangente das princ
 
 ### RQ 05 - Sistemas populares são escritos nas linguagens mais populares?
 
-**HI 05** - Projetos populares podem ser mais diversificados em termos de linguagens de programação, refletindo a variedade de interesses da comunidade.
+**HI 05** - A diversidade de linguagens de programação utilizadas será notável. Esta diversificação reflete a propensão desses projetos de destaque em incorporar uma ampla variedade de linguagens, evidenciando a abertura da comunidade para diferentes abordagens tecnológicas e interesses.
 
 ### RQ 06 - Sistemas populares possuem um alto percentual de issues fechadas?
 
@@ -143,7 +143,7 @@ Embora alguns sistemas populares tenham lançado um volume considerável de rele
 
 Os resultados indicam uma variedade de tempos de atualização, sem uma relação direta entre a popularidade e a frequência de atualizações. Diversos fatores podem influenciar essa frequência, não sendo possível afirmar que sistemas populares são atualizados com mais frequência de forma geral.
 
--   **HI 05 - Projetos populares podem ser mais diversificados em termos de linguagens de programação, refletindo a variedade de interesses da comunidade.**
+-   **HI 05 - A diversidade de linguagens de programação utilizadas será notável. Esta diversificação reflete a propensão desses projetos de destaque em incorporar uma ampla variedade de linguagens, evidenciando a abertura da comunidade para diferentes abordagens tecnológicas e interesses.**
 
 Os dados confirmam essa hipótese, mostrando que além das linguagens mais populares, uma variedade de outras linguagens está presente em sistemas populares. Isso sugere que a escolha da linguagem vai além da popularidade e está sujeita a uma série de fatores adicionais.
 
