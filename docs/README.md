@@ -55,11 +55,11 @@ Esta seção é destinada a tentar responder as perguntas levantadas com base no
 
 #### **RQ 01 - Sistemas populares são maduros/antigos?**
 
-[Gráfico de Boxplot de idade]
+![boxplot](https://github.com/GabrielLimaDeSouza/lab-experimentacao-software-01/assets/77488551/433bbe5f-3445-4fac-b774-dee535c12158)
 
 Com base na análise do gráfico de boxplot da idade dos repositórios de sistemas open-source populares, podemos inferir que a maioria desses sistemas não necessariamente se caracteriza como madura ou antiga. A mediana da idade dos repositórios é aproximadamente 8 anos, indicando que metade dos sistemas populares tem menos de 8 anos, enquanto a outra metade tem mais de 8 anos. Os quartis mostram que a maioria dos sistemas (50%) possui uma idade variando entre 6 e 10 anos, com o primeiro quartil em torno de 6 anos e o terceiro quartil em cerca de 10 anos. Isso sugere que o tempo de desenvolvimento e a acumulação de funcionalidades podem, de fato, contribuir para a popularidade desses sistemas.
 
-[Gráfico de Dispersão de idade]
+![dispesao idade](https://github.com/GabrielLimaDeSouza/lab-experimentacao-software-01/assets/77488551/8072fbad-f384-41b8-bcf3-9d78e271ae88)
 
 Ao analisar o gráfico de dispersão da idade em relação ao número de estrelas, observamos uma variação mais ampla. Sistemas com idades entre 5 e 11 anos tendem a ter mais estrelas, corroborando a ideia de que o tempo de desenvolvimento e a acumulação de funcionalidades podem influenciar positivamente a popularidade. No entanto, o gráfico de dispersão também revela que alguns projetos novos podem se tornar populares rapidamente. Alguns sistemas mais recentes, apesar de sua juventude, apresentam um alto número de estrelas, indicando que a novidade e a utilidade também podem desempenhar um papel crucial na popularidade de um sistema open-source.
 
@@ -67,9 +67,9 @@ Ao analisar o gráfico de dispersão da idade em relação ao número de estrela
 
 #### **RQ 02 - Sistemas populares recebem muita contribuição externa?**
 
-[Gráfico de Boxplot de última atualização]
+![boxplot ultima atualizacao](https://github.com/GabrielLimaDeSouza/lab-experimentacao-software-01/assets/77488551/7b34dcd4-eaae-4d30-b636-57e6956d4485)
 
-[Gráfico de Dispersão de última atualização]
+![dispersao ultima atualizacao](https://github.com/GabrielLimaDeSouza/lab-experimentacao-software-01/assets/77488551/6b2e4c94-e816-4ca5-ac52-ede88a2802b1)
 
 Sistemas open-source populares geralmente recebem uma quantidade significativa de contribuição externa, e o gráfico de dispersão fornecido corrobora essa afirmação. Em alguns casos, o número de `pull request` ultrapassa 10000.
 
@@ -79,9 +79,9 @@ Embora essa correlação seja evidente, há também exceções notáveis. Alguns
 
 #### **RQ 03 - Sistemas populares lançam releases com frequência?**
 
-[Gráfico de Boxplot do número de releases]
+![boxplot releases](https://github.com/GabrielLimaDeSouza/lab-experimentacao-software-01/assets/77488551/e9f1a777-09f8-4184-a5d4-621b8fd9118d)
+![dispersao releases](https://github.com/GabrielLimaDeSouza/lab-experimentacao-software-01/assets/77488551/f0035d3a-7665-412d-b701-28184f236abe)
 
-[Gráfico de Dispersão do número de releases]
 
 Na análise dos dados referentes aos lançamentos de releases nos projetos open-source populares, é possível observar uma tendência predominante: a maioria dos projetos com maior número de estrelas possui um número relativamente baixo de releases, concentrando-se principalmente entre 0 e 200 lançamentos. No entanto, é possível perceber que alguns sistemas mais populares lançaram um volume consideravelmente maior de releases.
 
@@ -91,9 +91,9 @@ Diversos fatores podem influenciar a frequência de lançamentos de releases. A 
 
 #### **RQ 04 - Sistemas populares são atualizados com frequência?**
 
-[Gráfico de Boxplot do tempo até a última atualização]
+![boxplot ultima atualizacao](https://github.com/GabrielLimaDeSouza/lab-experimentacao-software-01/assets/77488551/03dbbe32-f3ca-4e44-8588-7935684b8219)
 
-[Gráfico de Dispersão do tempo até a última atualização]
+![dispersao ultima atualizacao](https://github.com/GabrielLimaDeSouza/lab-experimentacao-software-01/assets/77488551/44672e80-f1b4-4234-befe-00d220a2cba3)
 
 A análise dos dados revela um padrão incerto na frequência de atualização dos sistemas open-source populares em relação à sua popularidade. Não há uma relação direta entre a quantidade de atualizações e a popularidade dos projetos. Eles podem apresentar uma variedade de tempos de atualização, que vão desde dias até anos, indicando uma grande diversidade nesse aspecto.
 
@@ -101,9 +101,9 @@ A frequência de atualização dos sistemas open-source populares não está dir
 
 #### **RQ 05 - Sistemas populares são escritos nas linguagens mais populares?**
 
-[Gráfico de Boxplot da linguagem primária dos repositórios]
+![linguagens mais populares](https://github.com/GabrielLimaDeSouza/lab-experimentacao-software-01/assets/77488551/34d35b8f-970b-4580-857d-3ee170ffcb57)
 
-[Gráfico de Dispersão da linguagem primária dos repositórios]
+![dispersao linguagens mais populares](https://github.com/GabrielLimaDeSouza/lab-experimentacao-software-01/assets/77488551/cc15f173-19a1-4591-8141-7a7df215e578)
 
 Algumas linguagens, como JavaScript, Python e Java, destacam-se por concentrar um grande número de repositórios populares, evidenciando sua ampla aceitação e uso na comunidade de desenvolvimento. No entanto, além dessas linguagens populares, também encontramos uma variedade de outras linguagens presentes em sistemas populares, como C++, PHP, Go, C# e Ruby, demonstrando a diversidade de escolhas utilizadas na construção desses projetos.
 
@@ -113,9 +113,9 @@ Além da popularidade, a escolha da linguagem de programação depende de divers
 
 #### **RQ 06 - Sistemas populares possuem um alto percentual de issues fechadas?**
 
-[Gráfico de Boxplot de issues fechadas]
+![boxplot num issues fechadas](https://github.com/GabrielLimaDeSouza/lab-experimentacao-software-01/assets/77488551/aa4d83fc-4812-4e30-bc74-d92b9b0d81d0)
 
-[Gráfico de Dispersão de issues fechadas]
+![dispersao issues fechadas](https://github.com/GabrielLimaDeSouza/lab-experimentacao-software-01/assets/77488551/dd1f301e-9a10-42b1-af05-7032d86abc88)
 
 A análise do gráfico de dispersão revela uma correlação positiva entre a popularidade dos sistemas open-source, medida pelo número de estrelas, e a taxa de issues fechadas. Sistemas mais populares tendem a apresentar uma taxa de issues fechadas mais alta, indicando uma eficácia superior na resolução de problemas. No entanto, também observamos exceções a essa tendência, em que sistemas menos populares exibem uma alta taxa de issues fechadas e vice-versa.
 
