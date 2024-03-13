@@ -61,15 +61,15 @@ Com base na análise do gráfico de boxplot da idade dos repositórios de sistem
 
 ![dispesao idade](https://github.com/GabrielLimaDeSouza/lab-experimentacao-software-01/assets/77488551/8072fbad-f384-41b8-bcf3-9d78e271ae88)
 
-Ao analisar o gráfico de dispersão da idade em relação ao número de estrelas, observamos uma variação mais ampla. Sistemas com idades entre 5 e 11 anos tendem a ter mais estrelas, corroborando a ideia de que o tempo de desenvolvimento e a acumulação de funcionalidades podem influenciar positivamente a popularidade. No entanto, o gráfico de dispersão também revela que alguns projetos novos podem se tornar populares rapidamente. Alguns sistemas mais recentes, apesar de sua juventude, apresentam um alto número de estrelas, indicando que a novidade e a utilidade também podem desempenhar um papel crucial na popularidade de um sistema open-source.
+Ao analisar o gráfico de dispersão da idade em relação ao número de estrelas, observamos uma variação mais ampla. Sistemas com idades entre 4 e 12 anos tendem a ter mais estrelas, corroborando a ideia de que o tempo de desenvolvimento e a acumulação de funcionalidades podem influenciar positivamente a popularidade. No entanto, o gráfico de dispersão também revela que alguns projetos novos podem se tornar populares rapidamente. Alguns sistemas mais recentes, apesar de sua juventude, apresentam um alto número de estrelas, indicando que a novidade e a utilidade também podem desempenhar um papel crucial na popularidade de um sistema open-source.
 
 É importante ressaltar que a idade do repositório não é o único indicador de maturidade em um sistema open-source. Outros fatores, como atividade de desenvolvimento, comunidade de usuários e qualidade do código, desempenham papéis significativos nessa avaliação. O gráfico revela uma diversidade considerável de idades entre os sistemas populares, com alguns sendo relativamente novos, enquanto outros existem há mais de uma década. Essa variedade demonstra a dinâmica e a evolução contínua do ecossistema de software open-source.
 
 #### **RQ 02 - Sistemas populares recebem muita contribuição externa?**
 
-![boxplot ultima atualizacao](https://github.com/GabrielLimaDeSouza/lab-experimentacao-software-01/assets/77488551/7b34dcd4-eaae-4d30-b636-57e6956d4485)
+![boxplot num pull requests](https://github.com/GabrielLimaDeSouza/lab-experimentacao-software-01/assets/77488551/c9bd43c7-c0af-42de-a2bc-d93c09fe01c4)
 
-![dispersao ultima atualizacao](https://github.com/GabrielLimaDeSouza/lab-experimentacao-software-01/assets/77488551/6b2e4c94-e816-4ca5-ac52-ede88a2802b1)
+![dispersao pull request](https://github.com/GabrielLimaDeSouza/lab-experimentacao-software-01/assets/77488551/2ed6c392-6d26-470b-b640-fe5abf53afec)
 
 Sistemas open-source populares geralmente recebem uma quantidade significativa de contribuição externa, e o gráfico de dispersão fornecido corrobora essa afirmação. Em alguns casos, o número de `pull request` ultrapassa 10000.
 
@@ -105,7 +105,7 @@ A frequência de atualização dos sistemas open-source populares não está dir
 
 ![dispersao linguagens mais populares](https://github.com/GabrielLimaDeSouza/lab-experimentacao-software-01/assets/77488551/cc15f173-19a1-4591-8141-7a7df215e578)
 
-Algumas linguagens, como JavaScript, Python e Java, destacam-se por concentrar um grande número de repositórios populares, evidenciando sua ampla aceitação e uso na comunidade de desenvolvimento. No entanto, além dessas linguagens populares, também encontramos uma variedade de outras linguagens presentes em sistemas populares, como C++, PHP, Go, C# e Ruby, demonstrando a diversidade de escolhas utilizadas na construção desses projetos.
+Algumas linguagens, como JavaScript, Python e Typescript, destacam-se por concentrar um grande número de repositórios populares, evidenciando sua ampla aceitação e uso na comunidade de desenvolvimento. No entanto, além dessas linguagens populares, também encontramos uma variedade de outras linguagens presentes em sistemas populares, como C++, PHP, Go, C# e Ruby, demonstrando a diversidade de escolhas utilizadas na construção desses projetos.
 
 Embora exista uma correlação entre a popularidade de uma linguagem e sua probabilidade de ser utilizada em sistemas populares, também encontramos exceções notáveis. É possível notar também que alguns casos, linguagens menos populares estão presentes em sistemas considerados populares. Isso sugere que a escolha da linguagem vai além da sua popularidade e está sujeita a uma série de fatores adicionais.
 
