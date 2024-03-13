@@ -123,7 +123,7 @@ Isso indica que sistemas open-source populares geralmente são mais eficientes n
 
 A elevada taxa de fechamento de issues em projetos populares pode estar diretamente associada ao grande volume de `pull requests` aceitas e à frequência considerável de atualizações realizadas.
 
-## Discussão da Hipóteses
+## Discussão das Hipóteses
 
 Nesta seção, serão analisadas as hipóteses informais relacionadas às perguntas investigativas em consonância com os resultados obtidos neste estudo:
 
